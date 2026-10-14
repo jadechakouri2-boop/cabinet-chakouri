@@ -913,6 +913,18 @@ a.cell-indigo:hover { background-color: var(--color-indigo-ink); }
 .member-card img { width: 112px; flex: none; mix-blend-mode: multiply; }
 .member-card p { font-size: 15px; line-height: 1.55; font-weight: 400; color: var(--color-steel); }
 
+/* Maître Ammas : même construction que la section 01, en miroir (texte à gauche, portrait à droite) */
+.lawyer--alt .lawyer-media { order: 0; }
+.lawyer--alt .t-h1 { text-wrap: balance; max-width: 19ch; }
+.lawyer--alt .lawyer-media .media { aspect-ratio: 382 / 500; }
+.lawyer-name { margin-top: 28px; font-size: 22px; line-height: 1.3; font-weight: 400; letter-spacing: -0.01em; color: var(--color-midnight-ink, #061b31); }
+.lawyer-cred { margin-top: 8px; font-size: 12.5px; line-height: 1.7; letter-spacing: .12em; text-transform: uppercase; color: var(--color-steel); }
+.lawyer-cred i { font-style: normal; margin: 0 .5em; color: var(--color-gold); }
+.lawyer-copy .lawyer-cred + .t-body-lg { margin-top: 24px; }
+.lawyer-copy .t-body { margin-top: 16px; }
+.lawyer-more[hidden] { display: none; }
+.lawyer-toggle { margin-top: 28px; }
+
 @media (max-width: 900px) {
   .lawyer { grid-template-columns: 1fr; }
   .lawyer-media { order: 0; max-width: 460px; }

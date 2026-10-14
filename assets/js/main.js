@@ -914,7 +914,26 @@
   /* ------------------------------------------------------------------------
      Démarrage
      ------------------------------------------------------------------------ */
+  /* ------------------------------------------------------------------------
+     « Lire plus » (présentation de Maître Ammas)
+     ------------------------------------------------------------------------ */
+  function initReadMore() {
+    Array.prototype.forEach.call(document.querySelectorAll('[data-readmore]'), function (btn) {
+      var target = document.getElementById(btn.getAttribute('aria-controls'));
+      if (!target) return;
+      btn.addEventListener('click', function () {
+        var open = btn.getAttribute('aria-expanded') === 'true';
+        btn.setAttribute('aria-expanded', open ? 'false' : 'true');
+        target.hidden = open;
+        Array.prototype.forEach.call(btn.querySelectorAll('[data-when]'), function (sp) {
+          sp.hidden = (sp.getAttribute('data-when') === 'open') === open;
+        });
+      });
+    });
+  }
+
   function init() {
+    initReadMore();
     safe(function () {
       $$('[data-split]').forEach(function (el) { if (el.getAttribute('data-split') !== 'manual') splitWords(el); });
     });
