@@ -932,8 +932,35 @@
     });
   }
 
+  /* Logos clients : en couleur uniquement quand on appuie dessus (clic, toucher ou Entrée) ; un second appui ou un clic ailleurs rend le gris */
+  function initLogoColor() {
+    var tiles = $$('.logo-tile');
+    if (!tiles.length) return;
+    function clear() {
+      tiles.forEach(function (t) { t.classList.remove('is-color'); t.setAttribute('aria-pressed', 'false'); });
+      $$('.marquee.is-paused').forEach(function (m) { m.classList.remove('is-paused'); });
+    }
+    function toggle(t) {
+      var on = !t.classList.contains('is-color');
+      clear();
+      if (on) {
+        t.classList.add('is-color'); t.setAttribute('aria-pressed', 'true');
+        var m = t.closest('.marquee'); if (m) m.classList.add('is-paused');
+      }
+    }
+    tiles.forEach(function (t) {
+      t.setAttribute('role', 'button'); t.setAttribute('aria-pressed', 'false');
+      if (!t.closest('[aria-hidden="true"]')) t.setAttribute('tabindex', '0');
+      t.addEventListener('click', function (e) { e.preventDefault(); toggle(t); });
+      t.addEventListener('keydown', function (e) { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); toggle(t); } });
+    });
+    document.addEventListener('click', function (e) { if (!e.target.closest('.logo-tile')) clear(); });
+    document.addEventListener('keydown', function (e) { if (e.key === 'Escape') clear(); });
+  }
+
   function init() {
     initReadMore();
+    initLogoColor();
     safe(function () {
       $$('[data-split]').forEach(function (el) { if (el.getAttribute('data-split') !== 'manual') splitWords(el); });
     });
