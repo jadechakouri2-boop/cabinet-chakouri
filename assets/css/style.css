@@ -277,7 +277,7 @@ address { font-style: normal; }
 .header-inner { height: 100%; display: flex; align-items: center; gap: 24px; }
 .brand { flex: none; display: block; transition: opacity .3s; }
 .brand:hover { opacity: .8; }
-.brand img { width: 232px; height: auto; border-radius: 3px; }
+.brand img { width: 272px; height: auto; }
 @media (max-width: 480px) {
   .header-inner { gap: 10px; }
   .header-inner .lang { margin-inline-start: auto; }
@@ -1445,7 +1445,7 @@ a.coord:hover .icon-tile { background: var(--color-indigo-ink); color: var(--col
    -------------------------------------------------------------------------- */
 .site-footer { position: relative; background: var(--color-mist); border-top: 1px solid var(--color-gold); padding: 80px 0 32px; }
 .footer-grid { display: grid; grid-template-columns: minmax(0, 1.5fr) minmax(0, 1fr) minmax(0, 1.2fr); gap: 48px; }
-.footer-brand img { width: 264px; border-radius: 3px; }
+.footer-brand img { width: 300px; }
 .footer-title { margin-bottom: 18px; font-size: 12px; line-height: 1.45; font-weight: 400; letter-spacing: .08em; text-transform: uppercase; color: var(--color-steel); }
 .footer-links a, .footer-contact a { display: inline-block; padding: 5px 0; font-size: 14px; font-weight: 400; color: var(--color-steel); transition: color .3s, transform .45s var(--ease-out); }
 .footer-links a:hover, .footer-contact a:hover { color: var(--color-indigo-ink); transform: translateX(4px); }
@@ -1989,5 +1989,5 @@ html[lang="en"] .role-en { display: none; }
 /* Coordonnées : deux adresses e-mail cliquables dans la carte de contact */
 .coord .v a { color: inherit; transition: color .3s; }
 .coord .v a:hover { color: var(--color-indigo-ink); }
-.mail-list { display: inline-grid; gap: 2px; vertical-align: top; }
+.mail-list { display: inline-grid; gap: 2px; vertical-align: baseline; }
 @media (max-width: 480px) { .coord .v a { font-size: 14.5px; } }
