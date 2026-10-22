@@ -1284,7 +1284,7 @@ a.cell-indigo:hover { background-color: var(--color-indigo-ink); }
    15. Équipe
    -------------------------------------------------------------------------- */
 .team { display: grid; grid-template-columns: repeat(5, minmax(0, 1fr)); gap: 48px 20px; }
-.member-photo { position: relative; overflow: hidden; aspect-ratio: 1 / 1; border-radius: var(--radius); background: var(--color-frost); }
+.member-photo { position: relative; overflow: hidden; aspect-ratio: 382 / 500; border-radius: var(--radius); background: var(--color-frost); }
 .member-photo img { width: 100%; height: 100%; object-fit: cover; transition: transform 1.3s var(--ease-out); }
 .member-photo::after {
   content: ""; position: absolute; inset: 0;
@@ -1889,3 +1889,92 @@ html[lang="en"] .role-en { display: none; }
   .mh-toc ol { columns: 1; }
   .mh-stats { grid-template-columns: minmax(0, 1fr); }
 }
+
+/* --------------------------------------------------------------------------
+   18. Alignement global des textes (22/10/2026)
+   Une seule colonne de texte pour tout le site, dans toutes les langues :
+   chaque paragraphe courant part du bord du conteneur (bord gauche, bord droit en arabe)
+   et ne dépasse jamais --measure. Photos, cartes, grilles et sommaires se placent
+   à côté (à droite, à gauche en arabe) ou en dessous. Les colonnes ne s'appliquent
+   qu'aux grands écrans ; sur mobile tout s'empile au même bord.
+   -------------------------------------------------------------------------- */
+:root {
+  --measure: 680px;        /* largeur maximale commune des paragraphes */
+  --title-gap: 28px;       /* titre (ou nom) → premier paragraphe */
+  --para-gap: 18px;        /* paragraphe → paragraphe */
+  --fs-body: 18px;         /* texte courant */
+  --lh-body: 1.7;
+  --fw-body: 350;
+  --fs-card: 16px;         /* texte dans les cartes et grilles */
+  --lh-card: 1.65;
+}
+@media (max-width: 600px) { :root { --fs-body: 17px; } }
+
+.nowrap { white-space: nowrap; }
+
+/* Typographie commune du texte courant */
+.t-body-lg, .lawyer-copy .t-body, .prose p, .domain p, .vj-featured-excerpt {
+  font-size: var(--fs-body); line-height: var(--lh-body); font-weight: var(--fw-body); color: var(--color-steel);
+}
+.prose strong, .lawyer-copy strong { font-weight: 400; color: var(--color-midnight-ink); }
+/* Texte des cartes : une seule taille partout */
+.facts p, .principles p, .panel-blocks p, .ledger .cell-body p, .member-card p, .vj-card p:not(.vj-meta) {
+  font-size: var(--fs-card); line-height: var(--lh-card);
+}
+.facts .probono p { font-size: var(--fs-body); line-height: var(--lh-body); }
+.facts .probono p, .panel-blocks > div:only-child p, .panel-blocks > .span-2 p { max-width: var(--measure); }
+
+/* Espacements harmonisés */
+.page-lead, .head > p, .lawyer-copy .t-body-lg, .lawyer-copy .lawyer-cred + .t-body-lg,
+.vision .t-body-lg, .contact-home .t-lead, .mh-teaser .t-lead { margin-top: var(--title-gap); }
+.lawyer-copy .t-body, .prose > * + *, .mh-sec > * + * { margin-top: var(--para-gap); }
+.mh-h2 { margin-bottom: var(--title-gap); }
+.domain h3 { margin-bottom: var(--para-gap); }
+
+/* Largeur commune */
+.page-hero-inner > p, .head > p, .conclusion, .rin, .domain p, .engagements p,
+.history-body > .t-lead, .mh-teaser .t-lead, .vj-featured-excerpt, .prose, .lawyer-copy, .tl-item .t-lead {
+  max-width: var(--measure);
+}
+
+/* En-têtes de section : le titre, puis l'introduction en dessous, au même bord */
+.head:not(.vj-head) { display: block; }
+
+/* Accueil 01 et 02 : même construction, texte d'abord, portrait ensuite */
+.lawyer-media, .lawyer--alt .lawyer-media { order: 0; }
+.vision-logo { order: 2; }   /* « Notre vision » : texte d’abord, logo ensuite, comme les sections 01 et 02 */
+
+/* Notre histoire : le texte au bord, la date en grand de l'autre côté ; les faits en dessous */
+.history-body { grid-template-columns: minmax(0, 1fr); gap: 48px; }
+.history-body > .t-lead { position: static; }
+
+/* Prestations : le numéro du domaine passe au-dessus du titre */
+.domain { grid-template-columns: minmax(0, 1fr); }
+.domain-num { padding-top: 0; }
+
+/* Charte GESICA : titre puis texte, au même bord */
+.gesica-intro { grid-template-columns: minmax(0, 1fr); gap: var(--title-gap); }
+.gesica-intro .prose { padding-top: 0; }
+
+@media (min-width: 901px) {
+  .lawyer, .about, .contact-home, .mh-teaser-grid, .vision, .vj-featured, .tl-item {
+    grid-template-columns: minmax(0, var(--measure)) minmax(0, 1fr);
+  }
+  .tl-item .t-lead { grid-column: 1; grid-row: 1; }
+  .tl-year { grid-column: 2; grid-row: 1; justify-self: end; }
+  .vision > :not(.vision-logo) { grid-column: 1; grid-row: 1; }
+  .vision-logo { grid-column: 2; grid-row: 1; justify-self: end; width: 100%; max-width: 440px; }
+  .vj-featured-body { grid-column: 1; grid-row: 1; }
+  .vj-featured-media { grid-column: 2; grid-row: 1; }
+}
+@media (min-width: 1101px) { .facts { grid-template-columns: repeat(4, minmax(0, 1fr)); } }
+@media (min-width: 1001px) {
+  .domains { grid-template-columns: minmax(0, 1fr) minmax(0, 300px); }
+  .domains-list { grid-column: 1; grid-row: 1; }
+  .domains-index { grid-column: 2; grid-row: 1; }
+  .mh-layout { grid-template-columns: minmax(0, var(--measure)) 240px; justify-content: space-between; }
+  .mh-article { grid-column: 1; grid-row: 1; }
+  .mh-toc { grid-column: 2; grid-row: 1; }
+}
+/* très petits téléphones : « l'excellence juridique » reste sur une ligne sans toucher le bord */
+@media (max-width: 360px) { .t-statement { font-size: 32px; } }
