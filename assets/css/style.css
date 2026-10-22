@@ -1284,7 +1284,7 @@ a.cell-indigo:hover { background-color: var(--color-indigo-ink); }
    15. Équipe
    -------------------------------------------------------------------------- */
 .team { display: grid; grid-template-columns: repeat(5, minmax(0, 1fr)); gap: 48px 20px; }
-.member-photo { position: relative; overflow: hidden; aspect-ratio: 382 / 500; border-radius: var(--radius); background: var(--color-frost); }
+.member-photo { position: relative; overflow: hidden; aspect-ratio: 1 / 1; border-radius: var(--radius); background: var(--color-frost); }
 .member-photo img { width: 100%; height: 100%; object-fit: cover; transition: transform 1.3s var(--ease-out); }
 .member-photo::after {
   content: ""; position: absolute; inset: 0;
