@@ -1026,16 +1026,15 @@ a.cell-indigo:hover { background-color: var(--color-indigo-ink); }
 }
 .logo-tile img {
   width: 84%; mix-blend-mode: multiply;
-  filter: grayscale(1) brightness(1.08) contrast(1.05);
-  opacity: .62;
   transition: opacity .45s var(--ease-out), transform .7s var(--ease-out);
 }
+/* Logos dont le cabinet n'a fourni qu'une version grise : fond éclairci, en attendant la version couleur */
+.logo-tile img.is-mono { filter: brightness(1.08) contrast(1.05); opacity: .85; }
 .logo-tile { cursor: pointer; }
 .logo-tile:hover { background: var(--color-periwinkle-wash); }
 .logo-tile:hover img { opacity: 1; }
-/* Logo en couleur uniquement quand on appuie dessus (clic ou toucher), à la même taille ; le défilement s'arrête tant qu'un logo est actif */
-.logo-tile.is-color { background: var(--color-pure-white); }
-.logo-tile.is-color img { filter: none; opacity: 1; }
+/* Les logos sont en couleur en permanence ; appuyer sur un logo arrête seulement le défilement */
+.logo-tile.is-color { background: var(--color-periwinkle-wash); }
 .logo-tile:focus-visible { outline: 2px solid var(--color-gold); outline-offset: -2px; }
 .marquee.is-paused .marquee-track { animation-play-state: paused; }
 
