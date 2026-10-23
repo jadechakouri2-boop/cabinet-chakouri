@@ -1029,7 +1029,7 @@ a.cell-indigo:hover { background-color: var(--color-indigo-ink); }
   transition: opacity .45s var(--ease-out), transform .7s var(--ease-out);
 }
 /* Logos dont le cabinet n'a fourni qu'une version grise : fond éclairci, en attendant la version couleur */
-.logo-tile img.is-mono { filter: brightness(1.08) contrast(1.05); opacity: .85; }
+.logo-tile img.is-mono { filter: brightness(1.04) contrast(1.05); }
 .logo-tile { cursor: pointer; }
 .logo-tile:hover { background: var(--color-periwinkle-wash); }
 .logo-tile:hover img { opacity: 1; }
